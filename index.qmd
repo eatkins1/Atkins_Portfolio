@@ -1,5 +1,5 @@
 ---
-title: "Aaron M. Kessler"
+title: "Taylor Atkins"
 about:
   template: jolla
   image: testimage.jpg
@@ -9,23 +9,23 @@ about:
       href: https://twitter.com/akesslerdc
     - icon: github
       text: Github
-      href: https://github.com/amkessler
+      href: https://github.com/eatkins1
 ---
 
-Hi, I'm Aaron and I'm a reporter at the AP in Washington. I like data, the ocean and F1 racing. I've got two little ones and enjoy watching them grow up.
+Hi, I'm Taylor and I'm a senior undergraduate student at The George Washington University in Washington, D.C. I like writing, data and video games. I'm looking forward to working in the journalism field combining my interests.
 
 ## Education
 
-University of Missouri tktktktk
+The George Washington University - BA, American Studies; Journalism & Mass Communications + Computer Science minor
 
-Columbia University
-
-Washington University in St. Louis
+Chatham High School
 
 ## Skills
 
-Reporting and Writing
+The Java, C#/C+, R, HTML, and Visual Basic for Applications coding languages
 
-Data Analysis
+Managing mass communications for organizations including websites and emails (through MailChimp)
 
-FOIA laws
+Experience with various aspects of the Adobe Creative Cloud, including: Photoshop, Premier Pro.
+
+Data analysis
