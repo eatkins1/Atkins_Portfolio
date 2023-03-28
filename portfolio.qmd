@@ -2,6 +2,14 @@
 title: "Portfolio"
 ---
 
-Hi there this is my portfolio page! Yay...
-  
-Here's another line for good measure.
+Hi there this is my portfolio page!
+
+## Fossil Free Festival 2022
+
+[Here](https://eatkins185.wixsite.com/taylor-portfolio/general-8) is a story covering an event at GWU by the local Sunrise Movement branch.
+
+[![](https://cms-assets.berniesanders.com/media/images/sunrise-movement.2e16d0ba.fill-600x600.png){fig-alt="Banner of the Sunrise Movement organization" width="418"}](https://eatkins185.wixsite.com/taylor-portfolio/general-8)
+
+## GW Pop Thrift!
+
+[Here](https://www.youtube.com/watch?v=AN_KMobc4ns&t=3s) is another story covering an event at GWU centered around sustainability on campus.

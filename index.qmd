@@ -2,17 +2,17 @@
 title: "Taylor Atkins"
 about:
   template: jolla
-  image: testimage.jpg
+  image: IMG_6114.jpeg
   links:
     - icon: twitter
       text: twitter
-      href: https://twitter.com/akesslerdc
+      href: https://twitter.com
     - icon: github
       text: Github
       href: https://github.com/eatkins1
 ---
 
-Hi, I'm Taylor and I'm a senior undergraduate student at The George Washington University in Washington, D.C. I like writing, data and video games. I'm looking forward to working in the journalism field combining my interests.
+Hi, I'm Taylor and I'm a senior at The George Washington University in Washington, D.C. I like writing, data and video games. I'm looking forward to working in the journalism field combining my interests.
 
 ## Education
 

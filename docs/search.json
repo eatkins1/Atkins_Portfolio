@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "Taylor Atkins",
     "section": "",
-    "text": "Hi, I’m Taylor and I’m a senior undergraduate student at The George Washington University in Washington, D.C. I like writing, data and video games. I’m looking forward to working in the journalism field combining my interests."
+    "text": "Hi, I’m Taylor and I’m a senior at The George Washington University in Washington, D.C. I like writing, data and video games. I’m looking forward to working in the journalism field combining my interests."
   },
   {
     "objectID": "index.html#education",
@@ -25,14 +25,28 @@
     "href": "index.html#skills",
     "title": "Taylor Atkins",
     "section": "Skills",
-    "text": "Skills\nExperience in Adobe and Microsoft Office services, including: Photoshop, Premiere Pro, and Excel\nData Analysis\nThe Java, C#/C+, R, HTML, and Visual Basic for Applications coding languages\nManaging mass communications for organizations including websites and emails (through MailChimp)"
+    "text": "Skills\nThe Java, C#/C+, R, HTML, and Visual Basic for Applications coding languages\nManaging mass communications for organizations including websites and emails (through MailChimp)\nExperience with various aspects of the Adobe Creative Cloud, including: Photoshop, Premier Pro.\nData analysis"
   },
   {
     "objectID": "portfolio.html",
     "href": "portfolio.html",
     "title": "Portfolio",
     "section": "",
-    "text": "Hi there this is my portfolio page! Yay…\nHere’s another line for good measure."
+    "text": "Hi there this is my portfolio page!"
+  },
+  {
+    "objectID": "portfolio.html#fossil-free-festival-2022",
+    "href": "portfolio.html#fossil-free-festival-2022",
+    "title": "Portfolio",
+    "section": "Fossil Free Festival 2022",
+    "text": "Fossil Free Festival 2022\nHere is a story covering an event at GWU by the local Sunrise Movement branch."
+  },
+  {
+    "objectID": "portfolio.html#gw-pop-thrift",
+    "href": "portfolio.html#gw-pop-thrift",
+    "title": "Portfolio",
+    "section": "GW Pop Thrift!",
+    "text": "GW Pop Thrift!\nHere is another story covering an event at GWU centered around sustainability on campus."
   },
   {
     "objectID": "about.html",
