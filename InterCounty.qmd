@@ -1,12 +1,11 @@
 ---
-title: "Interactive Maps"
-author: "Aaron Kessler"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
+title: "Interactive Counties Map of New Jersey"
+author: "Taylor Atkins"
 format:
   html:
     self-contained: true
-    toc: true
-    toc-location: left
+    code-fold: true
+    code-tools: true
 ---
 
 ```{r setup, include=FALSE}
@@ -88,7 +87,7 @@ colnames(nj_counties_withgeo) <- sub("E$", "", colnames(nj_counties_withgeo)) # 
 nj_counties_withgeo
 ```
 
-Mapping Virginia counties with mapview
+Mapping New Jersey counties with mapview
 
 ```{r}
 

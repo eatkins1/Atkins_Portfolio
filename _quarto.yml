@@ -16,6 +16,12 @@ website:
       - about.qmd
       - portfolio.qmd
       - walkthrough.qmd
+      - href: InterCounty.qmd
+        text: Interactive Counties, NJ
+      - href: ExampleWriting.qmd
+        text: Seminar Paper
+      - href: JournalismWriting.qmd
+        text: Journalism Writing
       
 
 

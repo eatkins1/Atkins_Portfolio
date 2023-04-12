@@ -1,0 +1,29 @@
+---
+title: "Example of reporting from class"
+author: "Taylor Atkins"
+format:
+  html:
+    self-contained: true
+    code-fold: true
+    code-tools: true
+---
+
+> High Risk: Mental Health in the Age of COVID
+>
+> 	In 2020 and 2021, COVID-19 has ravaged the world and changed how society functions. A large part of that was people needing to self-isolate themselves for the sake of preventing the spread of COVID. As a result of this and other aspects of the pandemic, there has been a roughly 27.6% increase in major depressive disorders and 25.6% increase in anxiety disorders globally, in a study by Santomauro (2021). Even just existing in the pandemic has noticeably raised mental health issues worldwide. \"It\'s definitely been noticeable,\" says Sarah West, a psychotherapist, \"in the past year I\'ve nearly doubled how many patients I see weekly.\" This more noticeable rise in mental health concerns was due to the pandemic and lockdowns all over, but on top of this, there is also a correlation between having COVID-19 and mental health issues.
+>
+> 	How do you feel when you are sick? Probably pretty bad, upset, sad, or even depression-like symptoms. According to a study led by Mazza(2021), Those who had COVID-19 are even worse off reporting symptoms of depression, anxiety, insomnia, and obsessive- compulsive disorder; these symptoms were worse for those with more severe cases of COVID. COVID-19 in particular has been shown to have long-term effects on those it infects, and these mental effects are included in this. Patients who had coronavirus have been seen to have these negative effects on their mental health persisting months after infection as well as suffering from post-traumatic stress disorder. \"No one I\'ve worked with, thankfully, has had coronavirus,\" says West, \"but I\'ve heard from coworkers who have had patients come into them after getting COVID. It has absolutely made things worse.\" As can be seen, the COVID-19 pandemic has had a significant impact on the mental health of millions, but the relationship goes both ways.
+>
+> 	In July of 2021, a meta-analysis, by Fond(2021), of 16 studies was conducted on the relationship between mental health and COVID-19. This analysis concluded that there is some connection between mental health disorders and higher mortality rates from coronavirus. The question immediately after learning this is, why? Why do people with mental health issues have a higher mortality rate with COVID-19 than others, is it the old school mentality of having a low constitution? 
+>
+> 	People with mental health issues, generally, are considered more likely to have physical health issues, so this is likely also extending into COVID patients. \"This would imply that one of the physical responses to mental health struggles is what is allowing these physical illnesses to happen,\" says West, \"Which would make sense to me; I\'ve seen patients, especially with very bad conditions, get sick more frequently.\" The leading theory is that there is some connection between the immune system and the mental health of someone. This theory would explain why when the immune system is working mental health declines, and why with poor mental health comes poor immune system functionality. Hypothetically this could be a cycle of mental health being degraded by illness and thus leaving someone more likely to be infected.
+>
+> 	Overall, this leaves one primary conclusion, those with mental health issues should be incredibly careful during the pandemic and in general. Those with mental illnesses are already more likely for health risks like heart disease, obesity, and addiction, and this just adds more on top of that. People with mental illness should be cautious, and people who get sick should try to take particular care of their mental health. West concludes, \"If all this data is conclusive then I think anyone that fits these groups should be treating themselves as if they're in a high-risk group.\"
+>
+> Works Cited:
+>
+> Fond, G., Nemani, K., Etchecopar-Etchart, D., Loundou, A., Goff, D. C., Lee, S. W., Lancon, C., Auquier, P., Baumstarck, K., Llorca, P.-M., Yon, D. K., & Boyer, L. (2021). Association between mental health disorders and mortality among patients with COVID-19 in 7 countries. JAMA Psychiatry, 78(11), 1208. https://doi.org/10.1001/jamapsychiatry.2021.2274
+>
+> Mazza, M. G., De Lorenzo, R., Conte, C., Poletti, S., Vai, B., Bollettini, I., Melloni, E. M., Furlan, R., Ciceri, F., Rovere-Querini, P., & Benedetti, F. (2020). Anxiety and depression in COVID-19 survivors: Role of inflammatory and clinical predictors. Brain, Behavior, and Immunity, 89, 594--600. https://doi.org/10.1016/j.bbi.2020.07.037
+>
+> Santomauro, D. F., Mantilla Herrera, A. M., Shadid, J., Zheng, P., Ashbaugh, C., Pigott, D. M., Abbafati, C., Adolph, C., Amlag, J. O., Aravkin, A. Y., Bang-Jensen, B. L., Bertolacci, G. J., Bloom, S. S., Castellano, R., Castro, E., Chakrabarti, S., Chattopadhyay, J., Cogen, R. M., Collins, J. K., ... Ferrari, A. J. (2021). Global prevalence and burden of depressive and anxiety disorders in 204 countries and territories in 2020 due to the COVID-19 pandemic. The Lancet, 398(10312), 1700--1712. https://doi.org/10.1016/s0140-6736(21)02143-7
