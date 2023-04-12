@@ -1,6 +1,6 @@
 ---
 title: "Analysis Walkthrough Example"
-author: "Aaron Kessler"
+author: "Taylor Atkins"
 format:
   html:
     self-contained: true
@@ -9,27 +9,131 @@ format:
 
 ---
 
-We'll start by loading. our libraries.
+This is some sample R coding work I've done.
 
-```{r}
-
+```{r setup, include=FALSE}
 library(tidyverse)
-library(lubridate)
+library(here)
+library(DT)
+library(janitor)
+library(scales)
+library(viridis)
+library(ggthemes)
+library(htmlwidgets)
+library(htmltools)
+options(scipen = 999)
+
+
+#load data from 2020 GA general election
+votedemos_2020_gen <- readRDS(here("data", "GA_votedemos_2020_gen.rds"))
+
+
+
 ```
 
-We're going to look at some sample data from Texas on housing prices throughout the state.
-
-First we'll load data.
+## Combine gender categories into total by race
 
 ```{r}
-# run this line below load the data for this assignment
-# we'll use a built-in dataset from the ggplot2 package (loaded as party of the tidyverse)
-housesales <- ggplot2::txhousing
+#create all_gender columns for black and white to combine gender-based ones provided in source
+votedemos_2020_gen <- votedemos_2020_gen %>% 
+  mutate(
+    black_ALL_registered = black_male_registered + black_female_registered + black_unknown_registered,
+    black_ALL_voted = black_male_voted + black_female_voted + black_unknown_voted,
+    black_ALL_pct = round_half_up(black_ALL_voted / black_ALL_registered * 100, 2),
+    white_ALL_registered = white_male_registered + white_female_registered + white_unknown_registered,
+    white_ALL_voted = white_male_voted + white_female_voted + white_unknown_voted,
+    white_ALL_pct = round_half_up(white_ALL_voted / white_ALL_registered * 100, 2),
+    female_ALL_registered = white_female_registered + black_female_registered + asian_female_registered + hispanic_female_registered + nativeamer_female_registered,
+    female_ALL_voted = white_female_voted + black_female_voted + asian_female_voted + hispanic_female_voted + nativeamer_female_voted,
+    female_ALL_pct = round_half_up(female_ALL_voted / female_ALL_registered * 100, 2)
+  )
+
+
 ```
 
-Now, let's see what the data looks like
 
 ```{r}
-housesales %>% 
-  head()
+
+votedemos_2020_gen <- votedemos_2020_gen %>% 
+  select(
+    elexyear, 
+    elextype,
+    county, 
+    county_code,
+    black_ALL_pct,
+    black_male_pct,
+    black_female_pct,
+    white_ALL_pct,
+    white_male_pct,
+    white_female_pct,
+    female_ALL_pct
+    )
+
+```
+
+
+
+## Charts
+
+Let's make some charts
+
+```{r}
+votedemos_2020_gen %>% 
+  arrange(desc(black_ALL_pct)) %>%
+  head(15) %>% 
+  ggplot(aes(x = reorder(county, black_ALL_pct), y = black_ALL_pct)) + 
+  geom_col(color = "black", fill = "blue") +
+  coord_flip() + 
+  scale_y_continuous(name = "Pct of Black Registered Voters Who Voted") +
+  scale_x_discrete(name = "County") +
+  theme_hc() +
+  labs(title = "Voter Turnout in GA", 
+       subtitle = "2020 General Election",
+       caption = "Source: GA Sec State") +
+  theme(axis.text.y = element_text(angle = 45))
+
+
+```
+
+Fix the axis labels?
+
+
+```{r}
+votedemos_2020_gen %>% 
+  arrange(desc(white_ALL_pct)) %>% 
+  head(15) %>% 
+  ggplot(aes(x = reorder(county, white_ALL_pct), y = white_ALL_pct)) + 
+  geom_col(color = "black", fill = "blue") +
+  coord_flip() + 
+  scale_y_continuous(name = "Pct of White Registered Voters Who Voted") +
+  scale_x_discrete(name = "County") +
+  theme_hc() +
+  labs(title = "Voter Turnout in GA", 
+       subtitle = "2020 General Election",
+       caption = "Source: GA Sec State") +
+  theme(axis.text.y = element_text(angle = 45)) 
+```
+
+```{r}
+votedemos_2020_gen %>% 
+  arrange(desc(female_ALL_pct)) %>% 
+  head(15) %>% 
+  ggplot(aes(x = reorder(county, female_ALL_pct), y = female_ALL_pct)) + 
+  geom_col(color = "black", fill = "pink") +
+  coord_flip() + 
+  scale_y_continuous(name = "Pct of female Registered Voters Who Voted") +
+  scale_x_discrete(name = "County") +
+  theme_hc() +
+  labs(title = "Voter Turnout in GA", 
+       subtitle = "2020 General Election",
+       caption = "Source: GA Sec State") +
+  theme(axis.text.y = element_text(angle = 45)) 
+```
+
+
+```{r}
+DT::datatable(votedemos_2020_gen, 
+              rownames = FALSE, 
+              filter = "top"# <--- NEW STUFF HERE
+              )
 ```
