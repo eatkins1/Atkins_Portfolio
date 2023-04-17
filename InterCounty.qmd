@@ -28,13 +28,10 @@ options(tigris_class = "sf")
 
 # Interactive Maps with MapView Package
 
-A h/t to Sharon Machlis for turning people on to the Mapview package, and her excellent walkthroughs of it.
-
-For the data tonight we'll be using the tidycensus package to pull both census data, as well as geospatial boundaries. 
-Let's quickly review how we use it.
+This page details the creation of an interactive map through R. This is meant as an example of how R and my work in it can be applied for journalistic works. For the data tonight we'll be using the tidycensus package to pull both census data, as well as geospatial boundaries.
 
 ```{r}
-
+#This block is just establishing an access key to use the US census
 # uncomment to run, then recomment it out so you don't run it every time
 
 # census_api_key("2a6f8c21a30d3024e038d67d7d4eba647dc79cd4", install=TRUE)
@@ -43,16 +40,15 @@ Let's quickly review how we use it.
 ```
 
 ```{r}
-#chose variables we want
+#This selects the variables that are going to be displayed on the final map
 myvars <- c(totalpop = "B01003_001",
             medincome = "B19013_001",
             medage = "B01002_001"
 )
 ```
 
-
 ```{r}
-#pull for VA counties
+#pulls the information for all the counties in New Jersey, this was selected because of it being my home state
 nj_counties_withgeo <- get_acs(geography = "county",
                        variables = c(myvars),
                        state = "NJ",
@@ -63,17 +59,7 @@ nj_counties_withgeo
 ```
 
 ```{r}
-#all counties in the US
-all_counties_withgeo <- get_acs(geography = "county",
-                       variables = c(myvars),
-                       output = "wide",
-                       geometry = TRUE)
-
-all_counties_withgeo
-```
-
-```{r}
-#remove MOE columns - they all end with "M"
+#This removes the "M" at the end of some variables that were automatically pulled from the census
 nj_counties_withgeo <- nj_counties_withgeo %>%
   select(-ends_with("M"))
 
@@ -81,7 +67,7 @@ nj_counties_withgeo
 ```
 
 ```{r}
-#remove that trailing "E"
+#This removes the "E" at the end of some variables that were automatically pulled from the census
 colnames(nj_counties_withgeo) <- sub("E$", "", colnames(nj_counties_withgeo)) # $ means end of string only
 
 nj_counties_withgeo
@@ -90,17 +76,17 @@ nj_counties_withgeo
 Mapping New Jersey counties with mapview
 
 ```{r}
-
+#this is the first map generated using mostly defaults of the mapView package
 mapview(nj_counties_withgeo, zcol = "medincome")
 
 
 
 ```
 
-
 Customize colors
-```{r}
 
+```{r}
+#this customizes the colors used for the variables on the map in this case using green hues
 mapview(nj_counties_withgeo, zcol = "medincome", 
          col.regions = RColorBrewer::brewer.pal(9, "Greens"), 
          alpha.regions = 1)
@@ -108,15 +94,15 @@ mapview(nj_counties_withgeo, zcol = "medincome",
 
 
 ```
-This map’s dark background appeared automatically, because mapview determined the map included a lot of light colors. You can turn off that feature.
+
+This map's dark background appeared automatically, because mapview determined the map included a lot of light colors. You can turn off that feature.
 
 ```{r}
-
+#this deactivates the automated selection of background of the map
 mapviewOptions("basemaps.color.shuffle" = FALSE)
 
 
 ```
-
 
 ```{r}
 
@@ -129,19 +115,19 @@ mapview(nj_counties_withgeo, zcol = "medincome",
 ```
 
 Two maps together
-```{r}
 
+```{r}
+#This makes two seperate maps one for medium income and one for median age one used greens hues and the other blue
 map_income <- mapview(nj_counties_withgeo, zcol = "medincome", 
          col.regions = RColorBrewer::brewer.pal(9, "Greens"), 
          alpha.regions = 1)
 
 map_age <- mapview(nj_counties_withgeo, zcol = "medage", 
-         col.regions = RColorBrewer::brewer.pal(9, "Greens"), 
+         col.regions = RColorBrewer::brewer.pal(9, "Blues"), 
          alpha.regions = 1)
 
 
 ```
-
 
 ```{r}
 
@@ -150,18 +136,19 @@ sync(map_income, map_age)
 
 ```
 
-Side-by-side slider to compare the two, from the leaflet.extras2 package 
-```{r}
+Side-by-side slider to compare the two, from the leaflet.extras2 package
 
+```{r}
+#This enables a slider to shift the singular map between the two different variables
 map_income | map_age
 
 
 ```
+
 To turn off legends, hover text, popups
 
-
 ```{r}
-
+#This removes the default legend and popups from the mapView package
 mapview(nj_counties_withgeo, zcol = "medincome", 
          col.regions = RColorBrewer::brewer.pal(9, "Greens"), 
          alpha.regions = 1,
@@ -173,8 +160,9 @@ mapview(nj_counties_withgeo, zcol = "medincome",
 ```
 
 Customize labels
-```{r}
 
+```{r}
+#This adds in new customized labels
 mylabel <- glue::glue("{nj_counties_withgeo$NAM} {nj_counties_withgeo$medincome}")
 
 
@@ -186,7 +174,9 @@ mapview(nj_counties_withgeo, zcol = "medincome",
 ```
 
 Customize popups
+
 ```{r}
+#This generates customized popups that are neater than the default
 mypopup <- glue::glue("<strong>{nj_counties_withgeo$NAM}</strong><br />
                       Total Population: {nj_counties_withgeo$totalpop}<br />
                       Median Income: ${nj_counties_withgeo$medincome}<br />
@@ -198,16 +188,14 @@ mypopup <- glue::glue("<strong>{nj_counties_withgeo$NAM}</strong><br />
 
 ```
 
-
 ```{r}
 
 head(mypopup)
 
 ```
 
-
 ```{r}
-
+#This incorporates the popups into the maps
 mapview(nj_counties_withgeo, zcol = "medincome", 
          col.regions = RColorBrewer::brewer.pal(9, "Greens"), 
          alpha.regions = 1,
@@ -215,4 +203,3 @@ mapview(nj_counties_withgeo, zcol = "medincome",
          label = mylabel)
 
 ```
-
