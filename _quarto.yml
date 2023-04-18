@@ -22,6 +22,8 @@ website:
         text: Seminar Paper
       - href: JournalismWriting.qmd
         text: Journalism Writing
+      - href: 02_virginia_election_project_youranalysis.qmd
+        text: VA Election Project
       
 
 

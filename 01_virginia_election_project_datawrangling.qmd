@@ -325,30 +325,22 @@ Where should we go from here....? Give it a shot...
 
 ```{r}
 
-joined_vacomparison <- joined_vacomparison %>% 
-  mutate(
-    dem_dif = (pct_mcauliffe - biden_pct),
-    rep_dif = (pct_youngkin - trump_pct)
-  )  
-  #select(locality,
-  #       dem_dif,
-  #       rep_dif)
+ 
+
 
 ```
 
 
 ```{r}
 
-joined_vacomparison <- joined_vacomparison %>% 
-  arrange(dem_dif)
+
 
 ```
 
 
 ```{r}
-joined_vacomparison %>% 
-saveRDS(here("processed_data", "joined_vacomparison.rds"))
-writeCSV(here("processed_data", "joined_vacomparison.csv"))
+
+
 
 ```
 
