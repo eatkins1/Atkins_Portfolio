@@ -50,8 +50,8 @@ joined_vacomparison <- readRDS(here("processed_data", "joined_vacomparison.rds")
 
 joined_vacomparison <- joined_vacomparison %>% 
   mutate(
-    dem_dif = (pct_mcauliffe - biden_pct),
-    rep_dif = (pct_youngkin - trump_pct)
+    dem_dif = round_half_up((pct_mcauliffe - biden_pct), 2),
+    rep_dif = round_half_up((pct_youngkin - trump_pct), 2)
   ) 
 
 ```
@@ -162,5 +162,66 @@ Mapping Virginia counties with mapview
 mapview(va_counties_data, zcol = "dem_dif")
 
 
+
+```
+
+
+To turn off legends, hover text, popups
+
+
+```{r}
+
+mapview(va_counties_data, zcol = "dem_dif", 
+         col.regions = RColorBrewer::brewer.pal(9, "Blues"), 
+         alpha.regions = 1,
+         legend = FALSE, 
+         label = FALSE, 
+         popup = FALSE)
+
+
+```
+
+Customize labels
+```{r}
+
+mylabel <- glue::glue("{va_counties_data$locality} {va_counties_data$dem_dif}")
+
+
+mapview(va_counties_data, zcol = "dem_dif", 
+         col.regions = RColorBrewer::brewer.pal(9, "Blues"), 
+         alpha.regions = 1,
+         label = mylabel)
+
+```
+
+Customize popups
+```{r}
+mypopup <- glue::glue("<strong>{va_counties_data$locality}</strong><br />
+                      Total Population: {va_counties_data$totalpop}<br />
+                      Difference in D Elections: {va_counties_data$dem_dif}<br />
+                      Median Income: ${va_counties_data$medincome}<br />
+                      Median Age: {va_counties_data$medage}") %>% 
+  lapply(htmltools::HTML)
+
+# mylabel <- glue::glue("{all_data$State} {all_data$PctChange10_20}%") %>%
+#   lapply(htmltools::HTML)
+
+```
+
+
+```{r}
+
+head(mypopup)
+
+```
+
+
+```{r}
+
+mapview(va_counties_data, zcol = "dem_dif", 
+         col.regions = RColorBrewer::brewer.pal(9, "Blues"), 
+         alpha.regions = 1,
+         popup = mypopup,
+         label = mylabel)
 
 ```
