@@ -1,5 +1,6 @@
 ---
 title: "About Me"
+author: "Taylor Atkins"
 about:
   template: broadside
   image: IMG_7618.jpg

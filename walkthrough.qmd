@@ -6,10 +6,9 @@ format:
     self-contained: true
     code-fold: true
     code-tools: true
-
 ---
 
-This is some sample R coding work I've done.
+This is some sample R coding work I've done. It covers a brief analysis of the election results and turnout for the general election in Georgia in 2020.
 
 ```{r setup, include=FALSE}
 library(tidyverse)
@@ -51,7 +50,6 @@ votedemos_2020_gen <- votedemos_2020_gen %>%
 
 ```
 
-
 ```{r}
 
 votedemos_2020_gen <- votedemos_2020_gen %>% 
@@ -70,8 +68,6 @@ votedemos_2020_gen <- votedemos_2020_gen %>%
     )
 
 ```
-
-
 
 ## Charts
 
@@ -96,7 +92,6 @@ votedemos_2020_gen %>%
 ```
 
 Fix the axis labels?
-
 
 ```{r}
 votedemos_2020_gen %>% 
@@ -129,7 +124,6 @@ votedemos_2020_gen %>%
        caption = "Source: GA Sec State") +
   theme(axis.text.y = element_text(angle = 45)) 
 ```
-
 
 ```{r}
 DT::datatable(votedemos_2020_gen, 
