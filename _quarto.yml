@@ -13,8 +13,6 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: Resume_2022_TAtkins.pdf
-      - text: Resume
       - about.qmd
       - portfolio.qmd
       - walkthrough.qmd
