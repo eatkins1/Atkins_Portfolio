@@ -14,7 +14,7 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - href: https://eatkins1.github.io/Atkins_Portfolio/Resume_2022_TAtkins.pdf
+      - href: https://github.com/eatkins1/Atkins_Portfolio/blob/main/Resume_2022_TAtkins.pdf
       - text: Resume
       - portfolio.qmd
       - walkthrough.qmd

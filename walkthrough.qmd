@@ -8,7 +8,7 @@ format:
     code-tools: true
 ---
 
-This is some sample R coding work I've done. It covers a brief analysis of the election results and turnout for the general election in Georgia in 2020.
+This is some sample R coding work I've done. It covers a brief analysis of the election results and turnout for the general election in Georgia in 2020. You can view the code by clicking on the little "code" tabs.
 
 ```{r setup, include=FALSE}
 library(tidyverse)
@@ -26,11 +26,13 @@ options(scipen = 999)
 #load data from 2020 GA general election
 votedemos_2020_gen <- readRDS(here("data", "GA_votedemos_2020_gen.rds"))
 
-
-
 ```
 
-## Combine gender categories into total by race
+## Congregating
+
+We begin by loading the packages that are going to be used as well as the data set, which is not seen here.
+
+This segment congregates the data pulled in on the Georgia election to form categories from the data on black and white people as well as women. These categories are the number of a population registered, number voted, and then calculating the percentage of registered voters who voted.
 
 ```{r}
 #create all_gender columns for black and white to combine gender-based ones provided in source
@@ -47,11 +49,11 @@ votedemos_2020_gen <- votedemos_2020_gen %>%
     female_ALL_pct = round_half_up(female_ALL_voted / female_ALL_registered * 100, 2)
   )
 
-
 ```
 
-```{r}
+Next we create a new data set which comprises the election year and type, county name and code, and the categories that were congregated previously.
 
+```{r}
 votedemos_2020_gen <- votedemos_2020_gen %>% 
   select(
     elexyear, 
@@ -71,7 +73,7 @@ votedemos_2020_gen <- votedemos_2020_gen %>%
 
 ## Charts
 
-Let's make some charts
+Next, we use the data set created to create charts using R and the tidyverse package. The first chart is graphing the the top 15 counties in Georgia in terms of percentage of registered black voters who did vote.
 
 ```{r}
 votedemos_2020_gen %>% 
@@ -88,10 +90,9 @@ votedemos_2020_gen %>%
        caption = "Source: GA Sec State") +
   theme(axis.text.y = element_text(angle = 45))
 
-
 ```
 
-Fix the axis labels?
+The next segment is functionally the same chart but covering percentage of registered white voters instead.
 
 ```{r}
 votedemos_2020_gen %>% 
@@ -103,31 +104,37 @@ votedemos_2020_gen %>%
   scale_y_continuous(name = "Pct of White Registered Voters Who Voted") +
   scale_x_discrete(name = "County") +
   theme_hc() +
-  labs(title = "Voter Turnout in GA", 
+  labs(title = "Voter Turnout in GA 2", 
        subtitle = "2020 General Election",
        caption = "Source: GA Sec State") +
   theme(axis.text.y = element_text(angle = 45)) 
+
 ```
+
+This segment once again covers similar territory, but this time covering women instead of black or white voters. Along with the change in coverage I also decided to change the color of the bars in this charts as there isn't much to change up. This segment was my own individual work while the previous segments were collaboratively done through class.
 
 ```{r}
 votedemos_2020_gen %>% 
   arrange(desc(female_ALL_pct)) %>% 
   head(15) %>% 
   ggplot(aes(x = reorder(county, female_ALL_pct), y = female_ALL_pct)) + 
-  geom_col(color = "black", fill = "pink") +
+  geom_col(color = "black", fill = "red") +
   coord_flip() + 
   scale_y_continuous(name = "Pct of female Registered Voters Who Voted") +
   scale_x_discrete(name = "County") +
   theme_hc() +
-  labs(title = "Voter Turnout in GA", 
+  labs(title = "Voter Turnout in GA 3", 
        subtitle = "2020 General Election",
        caption = "Source: GA Sec State") +
   theme(axis.text.y = element_text(angle = 45)) 
+
 ```
+
+Finally, this presents the data set that was created earlier in a clean table format in alphabetical order by county name.
 
 ```{r}
 DT::datatable(votedemos_2020_gen, 
               rownames = FALSE, 
-              filter = "top"# <--- NEW STUFF HERE
-              )
+              filter = "top")# <--- NEW STUFF HERE
+
 ```
