@@ -1,5 +1,5 @@
 ---
-title: "Analysis Walkthrough Example"
+title: "Analysis Example"
 author: "Taylor Atkins"
 format:
   html:

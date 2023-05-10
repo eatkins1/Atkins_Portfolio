@@ -1,0 +1,11 @@
+---
+title: "Custom Walkthrough"
+author: "Taylor Atkins"
+format:
+  html:
+    self-contained: true
+    code-fold: true
+    code-tools: true
+
+---
+

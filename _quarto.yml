@@ -13,6 +13,8 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: Resume_2022_TAtkins.pdf
+      - text: Resume
       - about.qmd
       - portfolio.qmd
       - walkthrough.qmd
@@ -24,6 +26,8 @@ website:
         text: Journalism Writing
       - href: 02_virginia_election_project_youranalysis.qmd
         text: VA Election Project
+      - CustomWalkthrough.qmd
+      - BreakingNews.qmd
       
 
 

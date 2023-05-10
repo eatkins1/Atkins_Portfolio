@@ -2,14 +2,38 @@
 title: "Portfolio"
 ---
 
-Hi there this is my portfolio page!
+```{r setup, include=FALSE}
+library("vembedr")
+```
+
+Hello, this is my portfolio page showing examples of some of my own journalistic works.
 
 ## Fossil Free Festival 2022
 
-[Here](https://eatkins185.wixsite.com/taylor-portfolio/general-8) is a story covering an event at GWU by the local Sunrise Movement branch.
+Below is a link to a multimedia story covering an event at GWU by the local Sunrise Movement branch. The story features both video coverage as well as a written segment; this was done for a journalism course at GWU.
 
-[![](https://cms-assets.berniesanders.com/media/images/sunrise-movement.2e16d0ba.fill-600x600.png){fig-alt="Banner of the Sunrise Movement organization" width="418"}](https://eatkins185.wixsite.com/taylor-portfolio/general-8)
+[![](https://cms-assets.berniesanders.com/media/images/sunrise-movement.2e16d0ba.fill-600x600.png){fig-alt="Banner of the Sunrise Movement organization" width="350"}](https://eatkins185.wixsite.com/taylor-portfolio/general-8)
 
 ## GW Pop Thrift!
 
-[Here](https://www.youtube.com/watch?v=AN_KMobc4ns&t=3s) is another story covering an event at GWU centered around sustainability on campus.
+<center>
+
+```{r, echo = FALSE}
+embed_url("https://www.youtube.com/watch?v=AN_KMobc4ns&t=3s")
+```
+
+</center>
+
+Above is a video-only story covering an event at GWU done for a journalism course. This event centered around a thrifting org on campus based on sustainability.
+
+## Department of Speech Language and Hearing Sciences Research at GWU
+
+<center>
+
+```{r, echo = FALSE}
+embed_url("https://www.youtube.com/watch?v=l4Ibw9bdRuY")
+```
+
+</center>
+
+Above is a video-only story covering research being conducted with GWU done for a journalism course. This research is centered on finding a more optimal technique for people with hearing-loss to learn lip reading.
