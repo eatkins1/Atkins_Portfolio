@@ -1,8 +1,10 @@
 ---
 title: "Custom Walkthrough/Tutorial"
 author: "Taylor Atkins"
-format: 
+format:
   html:
+    self-contained: true
+    code-tools: true
     code-block-bg: 'white'
 ---
 ```{css, echo = F}
