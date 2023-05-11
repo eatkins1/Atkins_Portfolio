@@ -15,19 +15,23 @@ website:
         text: Home
       - about.qmd
       - href: https://github.com/eatkins1/Atkins_Portfolio/blob/main/Resume_2022_TAtkins.pdf
-      - text: Resume
-      - portfolio.qmd
-      - walkthrough.qmd
-      - href: InterCounty.qmd
-        text: Interactive Counties, NJ
-      - href: ExampleWriting.qmd
-        text: Seminar Paper
-      - href: JournalismWriting.qmd
-        text: Journalism Writing
-      - href: 02_virginia_election_project_youranalysis.qmd
-        text: VA Election Project
-      - CustomWalkthrough.qmd
-      - BreakingNews.qmd
+        text: Resume
+      - text: "Journalism Examples"
+        menu:
+        - portfolio.qmd
+        - href: ExampleWriting.qmd
+          text: Seminar Paper
+        - href: JournalismWriting.qmd
+          text: Journalism Writing
+        - BreakingNews.qmd
+      - text: "R Coding Examples"
+        menu:
+        - walkthrough.qmd
+        - href: InterCounty.qmd
+          text: Interactive Counties, NJ
+        - href: 02_virginia_election_project_youranalysis.qmd
+          text: VA Election Project
+        - CustomWalkthrough.qmd
       
 
 

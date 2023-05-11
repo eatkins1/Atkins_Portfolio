@@ -6,9 +6,9 @@ execute:
 format:
   html:
     self-contained: true
+    code-fold: true
     code-tools: true
 ---
-
 
 ```{r setup, include=FALSE, warning=FALSE, message=FALSE}
 
@@ -41,10 +41,11 @@ joined_vacomparison <- readRDS(here("processed_data", "joined_vacomparison.rds")
 
 ```
 
+This project is similar to the interactive county map work because they both are based around maps using the tidyverse package. To begin we load up the packages that are going to be used as well as the data which was formulated during class.
 
-# Comparing Virgnia Gov vs. Prez
+# Comparing Virgnia Gov vs. Prez Races
 
-
+This project will be using data to compare the most recent gubernatorial and presidential elections in Virginia. To begin we calculate the difference between the gubernatorial results and presidential results for democrat and republican candidates.
 
 ```{r}
 
@@ -56,12 +57,14 @@ joined_vacomparison <- joined_vacomparison %>%
 
 ```
 
-```{r}
+```{r, echo = FALSE}
 
 #joined_vacomparison <- joined_vacomparison %>% 
   #arrange(dem_dif)
 
 ```
+
+We then calculate the election results difference and incorporate that with the general election data we began with.
 
 ```{r}
 
@@ -72,10 +75,7 @@ tail(joined_vacomparison)
 
 ```
 
-
-
-
-```{r}
+```{r, echo = FALSE}
 
 # uncomment to run, then recomment it out so you don't run it every time
 
@@ -92,8 +92,9 @@ myvars <- c(totalpop = "B01003_001",
 )
 ```
 
+Above, we select the variables that will be used in the map later. Below, we gather all the data that is needed to produce a map in R.
 
-```{r}
+```{r, results = FALSE, message = FALSE}
 #pull for VA counties
 va_counties_withgeo <- get_acs(geography = "county",
                        variables = c(myvars),
@@ -104,7 +105,7 @@ va_counties_withgeo <- get_acs(geography = "county",
 va_counties_withgeo
 ```
 
-```{r}
+```{r, results = FALSE, message = FALSE}
 #all counties in the US
 all_counties_withgeo <- get_acs(geography = "county",
                        variables = c(myvars),
@@ -114,7 +115,9 @@ all_counties_withgeo <- get_acs(geography = "county",
 all_counties_withgeo
 ```
 
-```{r}
+This removes the "M" at the end of some variables that were automatically pulled from the census.
+
+```{r, results = FALSE}
 #remove MOE columns - they all end with "M"
 va_counties_withgeo <- va_counties_withgeo %>%
   select(-ends_with("M"))
@@ -122,12 +125,16 @@ va_counties_withgeo <- va_counties_withgeo %>%
 va_counties_withgeo
 ```
 
-```{r}
+This removes the "E" at the end of some variables that were automatically pulled from the census.
+
+```{r, results = FALSE}
 #remove that trailing "E"
 colnames(va_counties_withgeo) <- sub("E$", "", colnames(va_counties_withgeo)) # $ means end of string only
 
 va_counties_withgeo
 ```
+
+Changes the name of one of the columns of "locality".
 
 ```{r}
 
@@ -143,6 +150,8 @@ va_counties_withgeo <- va_counties_withgeo %>%
 
 ```
 
+Then, we clean up some of the data on the back-end.
+
 ```{r}
 
 joined_vacomparison <- joined_vacomparison %>% 
@@ -150,12 +159,13 @@ joined_vacomparison <- joined_vacomparison %>%
 
 ```
 
-```{r}
+```{r, message = FALSE}
 
 va_counties_data <- full_join(va_counties_withgeo, joined_vacomparison)
 
 ```
-Mapping Virginia counties with mapview
+
+Finally we begin to map Virginia and its counties using mapview.
 
 ```{r}
 
@@ -165,9 +175,7 @@ mapview(va_counties_data, zcol = "dem_dif")
 
 ```
 
-
-To turn off legends, hover text, popups
-
+Next, we turn off legends, hover text, popups.
 
 ```{r}
 
@@ -181,7 +189,8 @@ mapview(va_counties_data, zcol = "dem_dif",
 
 ```
 
-Customize labels
+Here we create and insert custom labels.
+
 ```{r}
 
 mylabel <- glue::glue("{va_counties_data$locality} {va_counties_data$dem_dif}")
@@ -194,7 +203,8 @@ mapview(va_counties_data, zcol = "dem_dif",
 
 ```
 
-Customize popups
+Next we customize the pop-ups for the counties.
+
 ```{r}
 mypopup <- glue::glue("<strong>{va_counties_data$locality}</strong><br />
                       Total Population: {va_counties_data$totalpop}<br />
@@ -208,13 +218,13 @@ mypopup <- glue::glue("<strong>{va_counties_data$locality}</strong><br />
 
 ```
 
-
 ```{r}
 
 head(mypopup)
 
 ```
 
+Then we incorporate those pop-ups.
 
 ```{r}
 
@@ -225,3 +235,5 @@ mapview(va_counties_data, zcol = "dem_dif",
          label = mylabel)
 
 ```
+
+This project incorporates work from two separate projects worked on in/for class to create our own new piece. In my case we are able to see the difference in votes for the Democratic party between the 2020 presidential election and the 2022 gubernatorial races while comparing that to the median income and median age of the counties. There is certainly some interesting information that can be pulled from this, but the biggest take away for me was that there isn't a single counties in Virginia where the democratic governor got a higher percentage of the vote than President Biden did. Perhaps this is saying something about the political leanings of the state or perhaps the election turnout from Democrats for non-presidential races.
