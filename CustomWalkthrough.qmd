@@ -1,11 +1,112 @@
 ---
-title: "Custom Walkthrough"
+title: "Custom Walkthrough/Tutorial"
 author: "Taylor Atkins"
-format:
-  html:
-    self-contained: true
-    code-fold: true
-    code-tools: true
-
 ---
 
+# Guide on Gathering and Presenting Financial Information Using R
+
+For this walkthough and example we are going to be detailing how to use R to find and present stock information. We will begin by looking at Netflix's stock in a chart and graph formats, then we will do the same for Warner Bros Discovery, then we will compare four companies graphs al next to each other.
+
+We begin here with this first chunk; like most R programs this is where we establish and incorporate packages. Packages are essentially just helpful functions other people have made that we can use to make things simpler and our code tighter. For this example we will be using the tidyverse and tidyquant libraries which give us a wide variety of feature that are helpful for many applications of R.
+
+```{r setup, message=FALSE}
+
+library(tidyverse)
+library(tidyquant)
+
+```
+
+## Gathering Data and Charting
+
+We are next going to set a value named "ticker" to be "NFLX" for Netflix. Now when we type ticker later in the code it will be the same as if we typed out "NFLX". This saves time in some instances, and makes it easier to change later since we only need to change this value once right here instead of any point in the code that uses it.
+
+```{r}
+ticker <- "NFLX"
+```
+
+Next, we will use the tq_get function, which is part of tidyquant, to download the data of our stock. The data we get includes date, open, high, low, and close prices for each day that is in our range given. We give the range of from January 1st 2022 so we have all the data of the past year and a half, as of writing. We save all of this data as "nflx_data" for the same reasons we saved a variable "ticker" At the end, typing out the name of the the dataset we've just created presents us with a full spreadsheet of the data downloaded.
+
+```{r}
+nflx_data <- tq_get(ticker, get = "stock.prices", from = "2022-01-01")
+
+nflx_data
+```
+
+We use the ggplot and geom_line functions to utilize some of the data we just gathered. With these functions we can very easily make a simple line chart of, for our purposes, the date and close values we got previously. in the aes() portion of the ggplot function is where we can change the x value and y values.
+
+```{r}
+ggplot(nflx_data, aes(x = date, y = close)) +
+  geom_line()
+```
+
+Now we're going to begin a similar process with another companies stock information, Warner Bros Discovery. First, we change the value of "ticker" to be "WBD" to reflect the new value being used. We begin the same as before saving all of the information downloaded into "wbd_prices".
+
+```{r}
+ticker <- "WBD"
+
+wbd_prices  <- tq_get(ticker, get = "stock.prices", from = "2022-01-01")
+wbd_prices
+```
+
+Here we use the %\>%, or the pipe, tool to pull up a dataset we've established before. This is done when we want to present some alteration to the data without editing and rerunning the code we've made before in this chunk. For this we are using the arrange function to sort our dataset in descending order by date, in other words from today to January 1st 2022 instead of from then to now. Because of certain things we \*didn't\* do this will not actually edit our original dataset only present the editing dataset for us.
+
+```{r}
+wbd_prices %>% 
+  arrange(desc(date))
+```
+
+We once again use the pipe tool to bring the "wbd_prices" dataset into this chunk. We then run essentially the same code we ran earlier with ggplot and geom_line, but with a slight addition. We are able to add labels to the charts we create here, so we label the whole chart as well as give a new label to close being "Closing Price" to be a bit more user friendly.
+
+```{r}
+wbd_prices %>%
+  ggplot(aes(x = date, y = close)) +
+  geom_line() +
+  labs(title = "Warner Bros Discovery Stock Price", y = "Closing Price", x = "")
+```
+
+Now we add geom_ma function which displays the moving average of the chart over time which we set to the color green.
+
+```{r}
+wbd_prices %>%
+  ggplot(aes(x = date, y = close)) +
+  geom_line() +
+  labs(title = "Warner Bros Discovery Stock Price", y = "Closing Price", x = "") +
+  geom_ma(ma_fun = SMA, n = 50, color = "green", size = 1.25) +
+  theme_minimal()
+```
+
+## Multiple Companies
+
+We begin with the same process as before, but in tq_get we can type q() and within that type out multiple stock names instead of one. This gathers all four companies data in one huge dataset. We then use the count function to count how many of each symbol, stock name, there are in the dataset, so it counts how many entries each of the four companies have and presents that in a much smaller dataset.
+
+```{r}
+mycompanies  <- tq_get(c("WBD", "NFLX", "DIS", "AAPL"), 
+                       get = "stock.prices", 
+                       from = "2022-01-01")
+mycompanies 
+
+mycompanies %>% 
+  count(symbol)
+```
+
+Much like before, we use ggplot and geom_line to present the graphs of the dataset we've created. We use a facet_wrap function to change what would have been one long line of charts into a 2x2 grid all of which are ordered and labeled by their symbol.
+
+```{r}
+mycompanies %>%
+  ggplot(aes(x = date, y = close)) +
+  geom_line() +
+  labs(title = "", y = "Closing Price", x = "") +
+  facet_wrap(~ symbol, ncol = 2, scale = "free_y")
+```
+
+Finally, we add another moving average line to each of our charts. From here we can use this to analyze the stocks of the four companies and compare and contrast, and because this is pulled from an online source they will continue to update since we set no end date.
+
+```{r}
+mycompanies %>%
+  ggplot(aes(x = date, y = close)) +
+  geom_line() +
+  labs(title = "", y = "Closing Price", x = "") +
+  geom_ma(ma_fun = SMA, n = 50, color = "green", size = 1.25) +
+  facet_wrap(~ symbol, ncol = 2, scale = "free_y") +
+  theme_minimal()
+```
