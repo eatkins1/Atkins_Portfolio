@@ -6,7 +6,11 @@ format:
     self-contained: true
     code-fold: true
     code-tools: true
+    code-block-bg: 'white'
 ---
+```{css, echo = F}
+.bgOut { background-color: Gray; color: white;}
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -50,7 +54,7 @@ myvars <- c(totalpop = "B01003_001",
 
 Pulls the information for all the counties in New Jersey, this was selected because of it being my home state.
 
-```{r, results = FALSE}
+```{r, results = FALSE, message = FALSE}
 nj_counties_withgeo <- get_acs(geography = "county",
                        variables = c(myvars),
                        state = "NJ",
@@ -86,7 +90,7 @@ mapview(nj_counties_withgeo, zcol = "medincome")
 
 This customizes the colors used for the variables on the map in this case using green hues.
 
-```{r}
+```{r, message = FALSE}
 mapview(nj_counties_withgeo, zcol = "medincome", 
          col.regions = RColorBrewer::brewer.pal(9, "Greens"), 
          alpha.regions = 1)
@@ -100,7 +104,7 @@ mapviewOptions("basemaps.color.shuffle" = FALSE)
 
 ```
 
-```{r}
+```{r, message = FALSE}
 mapview(nj_counties_withgeo, zcol = "medincome", 
          col.regions = RColorBrewer::brewer.pal(9, "Greens"), 
          alpha.regions = 1)
@@ -109,7 +113,7 @@ mapview(nj_counties_withgeo, zcol = "medincome",
 
 This makes two seperate maps one for medium income and one for median age one used greens hues and the other blue.
 
-```{r}
+```{r, message = FALSE}
 map_income <- mapview(nj_counties_withgeo, zcol = "medincome", 
          col.regions = RColorBrewer::brewer.pal(9, "Greens"), 
          alpha.regions = 1)
@@ -134,7 +138,7 @@ map_income | map_age
 
 This removes the default legend and popups from the mapView package.
 
-```{r}
+```{r, message = FALSE}
 mapview(nj_counties_withgeo, zcol = "medincome", 
          col.regions = RColorBrewer::brewer.pal(9, "Greens"), 
          alpha.regions = 1,
@@ -146,7 +150,7 @@ mapview(nj_counties_withgeo, zcol = "medincome",
 
 This adds in new customized labels.
 
-```{r}
+```{r, message = FALSE}
 mylabel <- glue::glue("{nj_counties_withgeo$NAM} {nj_counties_withgeo$medincome}")
 
 
@@ -171,7 +175,7 @@ mypopup <- glue::glue("<strong>{nj_counties_withgeo$NAM}</strong><br />
 
 ```
 
-```{r}
+```{r, class.output = "bgOut"}
 
 head(mypopup)
 
@@ -179,7 +183,7 @@ head(mypopup)
 
 This incorporates the popups into the maps.
 
-```{r}
+```{r, message = FALSE}
 mapview(nj_counties_withgeo, zcol = "medincome", 
          col.regions = RColorBrewer::brewer.pal(9, "Greens"), 
          alpha.regions = 1,

@@ -8,7 +8,11 @@ format:
     self-contained: true
     code-fold: true
     code-tools: true
+    code-block-bg: 'white'
 ---
+```{css, echo = F}
+.bgOut { background-color: Gray; color: white;}
+```
 
 ```{r setup, include=FALSE, warning=FALSE, message=FALSE}
 
@@ -66,7 +70,7 @@ joined_vacomparison <- joined_vacomparison %>%
 
 We then calculate the election results difference and incorporate that with the general election data we began with.
 
-```{r}
+```{r, class.output = "bgOut"}
 
 joined_vacomparison <- joined_vacomparison %>% 
   relocate(dem_dif, rep_dif, .after = locality)
@@ -177,7 +181,7 @@ mapview(va_counties_data, zcol = "dem_dif")
 
 Next, we turn off legends, hover text, popups.
 
-```{r}
+```{r, message = FALSE}
 
 mapview(va_counties_data, zcol = "dem_dif", 
          col.regions = RColorBrewer::brewer.pal(9, "Blues"), 
@@ -191,7 +195,7 @@ mapview(va_counties_data, zcol = "dem_dif",
 
 Here we create and insert custom labels.
 
-```{r}
+```{r, message = FALSE}
 
 mylabel <- glue::glue("{va_counties_data$locality} {va_counties_data$dem_dif}")
 
@@ -218,7 +222,7 @@ mypopup <- glue::glue("<strong>{va_counties_data$locality}</strong><br />
 
 ```
 
-```{r}
+```{r, class.output = "bgOut"}
 
 head(mypopup)
 
@@ -226,7 +230,7 @@ head(mypopup)
 
 Then we incorporate those pop-ups.
 
-```{r}
+```{r, message = FALSE}
 
 mapview(va_counties_data, zcol = "dem_dif", 
          col.regions = RColorBrewer::brewer.pal(9, "Blues"), 

@@ -6,8 +6,8 @@ format:
     self-contained: true
     code-fold: true
     code-tools: true
+    code-block-bg: 'white'
 ---
-
 This is some sample R coding work I've done. It covers a brief analysis of the election results and turnout for the general election in Georgia in 2020. You can view the code by clicking on the little "code" tabs.
 
 ```{r setup, include=FALSE}
@@ -135,6 +135,7 @@ Finally, this presents the data set that was created earlier in a clean table fo
 ```{r}
 DT::datatable(votedemos_2020_gen, 
               rownames = FALSE, 
-              filter = "top")# <--- NEW STUFF HERE
+              filter = "top") %>% 
+  DT::formatStyle(0:8, headerColor = 'grey', backgroundColor = 'white', opacity = 1)
 
 ```

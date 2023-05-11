@@ -1,8 +1,13 @@
 ---
 title: "Custom Walkthrough/Tutorial"
 author: "Taylor Atkins"
+format: 
+  html:
+    code-block-bg: 'white'
 ---
-
+```{css, echo = F}
+.bgOut { background-color: Gray; color: white;}
+```
 # Guide on Gathering and Presenting Financial Information Using R
 
 For this walkthough and example we are going to be detailing how to use R to find and present stock information. We will begin by looking at Netflix's stock in a chart and graph formats, then we will do the same for Warner Bros Discovery, then we will compare four companies graphs al next to each other.
@@ -26,7 +31,7 @@ ticker <- "NFLX"
 
 Next, we will use the tq_get function, which is part of tidyquant, to download the data of our stock. The data we get includes date, open, high, low, and close prices for each day that is in our range given. We give the range of from January 1st 2022 so we have all the data of the past year and a half, as of writing. We save all of this data as "nflx_data" for the same reasons we saved a variable "ticker" At the end, typing out the name of the the dataset we've just created presents us with a full spreadsheet of the data downloaded.
 
-```{r}
+```{r, class.output = "bgOut"}
 nflx_data <- tq_get(ticker, get = "stock.prices", from = "2022-01-01")
 
 nflx_data
@@ -41,7 +46,7 @@ ggplot(nflx_data, aes(x = date, y = close)) +
 
 Now we're going to begin a similar process with another companies stock information, Warner Bros Discovery. First, we change the value of "ticker" to be "WBD" to reflect the new value being used. We begin the same as before saving all of the information downloaded into "wbd_prices".
 
-```{r}
+```{r, class.output = "bgOut"}
 ticker <- "WBD"
 
 wbd_prices  <- tq_get(ticker, get = "stock.prices", from = "2022-01-01")
@@ -50,7 +55,7 @@ wbd_prices
 
 Here we use the %\>%, or the pipe, tool to pull up a dataset we've established before. This is done when we want to present some alteration to the data without editing and rerunning the code we've made before in this chunk. For this we are using the arrange function to sort our dataset in descending order by date, in other words from today to January 1st 2022 instead of from then to now. Because of certain things we \*didn't\* do this will not actually edit our original dataset only present the editing dataset for us.
 
-```{r}
+```{r, class.output = "bgOut"}
 wbd_prices %>% 
   arrange(desc(date))
 ```
@@ -79,7 +84,7 @@ wbd_prices %>%
 
 We begin with the same process as before, but in tq_get we can type q() and within that type out multiple stock names instead of one. This gathers all four companies data in one huge dataset. We then use the count function to count how many of each symbol, stock name, there are in the dataset, so it counts how many entries each of the four companies have and presents that in a much smaller dataset.
 
-```{r}
+```{r, class.output = "bgOut"}
 mycompanies  <- tq_get(c("WBD", "NFLX", "DIS", "AAPL"), 
                        get = "stock.prices", 
                        from = "2022-01-01")

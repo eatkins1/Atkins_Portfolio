@@ -6,5 +6,58 @@ format:
     self-contained: true
     code-fold: true
     code-tools: true
-
+    code-block-bg: 'white'
 ---
+
+###### This is not a real breaking news story; this is just an example of news story writing using R
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(lubridate)
+library(DT)
+
+```
+
+```{r, echo = FALSE, results = FALSE, message = FALSE}
+
+legislation <- read_csv("2023 Anti-Trans Bills _ Track Trans Legislation.csv")
+
+```
+
+```{r, echo = FALSE, results = FALSE, message = FALSE}
+
+legislation <- legislation%>% 
+  mutate(year = year(Date)) %>% 
+  filter(year == 2023) %>% 
+  select(
+    Date,
+    State,
+    Bill,
+    Status
+  )
+legislation
+
+```
+
+## Transphobic Legislation Sweeps the Nation
+
+###### By Taylor Atkins
+
+###### May 12, 2023
+
+2023 has been a record year in terms of transphobic legislation introduced across the nation. As of writing there are [`r count(legislation)` bills](https://www.tracktranslegislation.com/) introduced in 2023 alone this is far higher than any previous year. This is higher than the entirety of 2022, which was the most bills introduced in a year, with 315 bills. Of the `r count(legislation)` bills introduced only `r legislation %>% filter(Status == "Signed/Enacted") %>% count()`, or `r count(legislation)/(legislation %>% filter(Status == "Signed/Enacted") %>% count())`%, of them have been passed into state laws. 
+
+Why are all these bills happening? Most of these bills being introduced are being done by republican politicians with the stated claim of 'protecting children'. As many trans advocates and allies have pointed out this was simply a starting point for removing trans people from public life. This was seen through previous republican uses of the "think of the children'' approach to legislation including with other LGBT+ rights and freedoms.
+
+Many of the bills that are allegedly targeting drag performance are written in an intentionally vague and generalizable way so as to be able to attack trans people who are just living in public. This is because of the vagueness of a drag performance, generally being just wearing clothing not associated with your sex assigned at birth, and what is actually considered a performance. The bills went on from there to start targeting trans adults and their ability to access the medical care they need and their ability to live in society.
+
+```{r, echo = FALSE}
+
+DT::datatable(legislation, 
+              rownames = FALSE, 
+              filter = "top") %>% 
+DT::formatStyle(0:8, menuBackgroundColor = "white", color = "black", backgroundColor = 'white', opacity = 1)
+
+```

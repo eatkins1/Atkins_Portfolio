@@ -212,7 +212,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#guide-on-gathering-and-presenting-financial-information-using-r" id="toc-guide-on-gathering-and-presenting-financial-information-using-r" class="nav-link active" data-scroll-target="#guide-on-gathering-and-presenting-financial-information-using-r">Guide on Gathering and Presenting Financial Information Using R</a>
+  <ul class="collapse">
+  <li><a href="#gathering-data-and-charting" id="toc-gathering-data-and-charting" class="nav-link" data-scroll-target="#gathering-data-and-charting">Gathering Data and Charting</a></li>
+  <li><a href="#multiple-companies" id="toc-multiple-companies" class="nav-link" data-scroll-target="#multiple-companies">Multiple Companies</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -240,14 +250,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>##Guide on Gathering and Presenting Financial Information Using R</p>
+<div class="cell">
+<style type="text/css">
+.bgOut { background-color: Gray; color: white;}
+</style>
+</div>
+<section id="guide-on-gathering-and-presenting-financial-information-using-r" class="level1">
+<h1>Guide on Gathering and Presenting Financial Information Using R</h1>
 <p>For this walkthough and example we are going to be detailing how to use R to find and present stock information. We will begin by looking at Netflix’s stock in a chart and graph formats, then we will do the same for Warner Bros Discovery, then we will compare four companies graphs al next to each other.</p>
 <p>We begin here with this first chunk; like most R programs this is where we establish and incorporate packages. Packages are essentially just helpful functions other people have made that we can use to make things simpler and our code tighter. For this example we will be using the tidyverse and tidyquant libraries which give us a wide variety of feature that are helpful for many applications of R.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>#Gathering Data and Charting</p>
+<section id="gathering-data-and-charting" class="level2">
+<h2 class="anchored" data-anchor-id="gathering-data-and-charting">Gathering Data and Charting</h2>
 <p>We are next going to set a value named “ticker” to be “NFLX” for Netflix. Now when we type ticker later in the code it will be the same as if we typed out “NFLX”. This saves time in some instances, and makes it easier to change later since we only need to change this value once right here instead of any point in the code that uses it.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ticker <span class="ot">&lt;-</span> <span class="st">"NFLX"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -258,7 +275,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>nflx_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 340 × 8
+<pre class="bgOut"><code># A tibble: 340 × 8
    symbol date        open  high   low close  volume adjusted
    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
  1 NFLX   2022-01-03  606.  610.  591.  597. 3067500     597.
@@ -279,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nflx_data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> close)) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="CustomWalkthrough_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="CustomWalkthrough_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Now we’re going to begin a similar process with another companies stock information, Warner Bros Discovery. First, we change the value of “ticker” to be “WBD” to reflect the new value being used. We begin the same as before saving all of the information downloaded into “wbd_prices”.</p>
@@ -289,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>wbd_prices  <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(ticker, <span class="at">get =</span> <span class="st">"stock.prices"</span>, <span class="at">from =</span> <span class="st">"2022-01-01"</span>)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>wbd_prices</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 340 × 8
+<pre class="bgOut"><code># A tibble: 340 × 8
    symbol date        open  high   low close   volume adjusted
    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
  1 WBD    2022-01-03  23.9  25.8  23.8  25.3 10231100     25.3
@@ -310,10 +327,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>wbd_prices <span class="sc">%&gt;%</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(date))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 340 × 8
+<pre class="bgOut"><code># A tibble: 340 × 8
    symbol date        open  high   low close   volume adjusted
    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
- 1 WBD    2023-05-10  13.6  13.6  12.7  13.0 21785600     13.0
+ 1 WBD    2023-05-10  13.6  13.6  12.7  13.0 21790000     13.0
  2 WBD    2023-05-09  13.3  13.5  13.2  13.4 20611200     13.4
  3 WBD    2023-05-08  13    13.6  12.8  13.5 20909500     13.5
  4 WBD    2023-05-05  11.8  13.0  11.6  12.9 43776200     12.9
@@ -333,7 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Warner Bros Discovery Stock Price"</span>, <span class="at">y =</span> <span class="st">"Closing Price"</span>, <span class="at">x =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="CustomWalkthrough_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="CustomWalkthrough_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Now we add geom_ma function which displays the moving average of the chart over time which we set to the color green.</p>
@@ -349,10 +366,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ℹ Please use `linewidth` in the `default_aes` field and elsewhere instead.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="CustomWalkthrough_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="CustomWalkthrough_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>#Multiple Companies</p>
+</section>
+<section id="multiple-companies" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-companies">Multiple Companies</h2>
 <p>We begin with the same process as before, but in tq_get we can type q() and within that type out multiple stock names instead of one. This gathers all four companies data in one huge dataset. We then use the count function to count how many of each symbol, stock name, there are in the dataset, so it counts how many entries each of the four companies have and presents that in a much smaller dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mycompanies  <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"WBD"</span>, <span class="st">"NFLX"</span>, <span class="st">"DIS"</span>, <span class="st">"AAPL"</span>), </span>
@@ -360,7 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">from =</span> <span class="st">"2022-01-01"</span>)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>mycompanies </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,360 × 8
+<pre class="bgOut"><code># A tibble: 1,360 × 8
    symbol date        open  high   low close   volume adjusted
    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
  1 WBD    2022-01-03  23.9  25.8  23.8  25.3 10231100     25.3
@@ -378,7 +397,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mycompanies <span class="sc">%&gt;%</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(symbol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
+<pre class="bgOut"><code># A tibble: 4 × 2
   symbol     n
   &lt;chr&gt;  &lt;int&gt;
 1 AAPL     340
@@ -395,7 +414,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Closing Price"</span>, <span class="at">x =</span> <span class="st">""</span>) <span class="sc">+</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> symbol, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="st">"free_y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="CustomWalkthrough_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="CustomWalkthrough_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Finally, we add another moving average line to each of our charts. From here we can use this to analyze the stocks of the four companies and compare and contrast, and because this is pulled from an online source they will continue to update since we set no end date.</p>
@@ -408,11 +427,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> symbol, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="CustomWalkthrough_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="CustomWalkthrough_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
