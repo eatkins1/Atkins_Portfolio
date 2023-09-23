@@ -12,7 +12,7 @@ about:
       href: https://github.com/eatkins1
 ---
 
-Hi, I'm Taylor and I'm a student at The George Washington University in Washington, D.C. I like writing, data, and video games. I'm looking forward to working in the journalism field combining my interests.
+Hi, I'm Taylor and I'm a recent graduate from The George Washington University in Washington, D.C. I like writing, data, and video games. I'm looking forward to working in the journalism field combining my interests.
 
 ## Education
 
